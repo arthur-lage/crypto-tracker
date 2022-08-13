@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  --title: #222;
+  --header: #fff;
+  --background: #fefff6;
+  --card: #f2f2f2;
+  --card-hover: #fff;
+  --text: #222;
+
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+body.dark {
+  --title: #fff;
+  --header: #2e2a40;
+  --background: #1e1b2a;
+  --card-hover: #363051;
+  --card: #27223b;
+  --text: #fff;
+}
