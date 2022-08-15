@@ -16,5 +16,8 @@ export interface Coin {
     };
     market_cap_rank: number;
     price_change_24h: number;
+    total_volume: {
+      usd: number;
+    };
   };
 }

@@ -11,9 +11,9 @@ export function ThemeToggler({ darkTheme, toggleTheme }: Props) {
   return (
     <button className={styles.toggler} onClick={toggleTheme}>
       {darkTheme ? (
-        <Moon size={32} color={"#fff"} weight="bold" />
+        <Moon size={28} color={"#fff"} weight="bold" />
       ) : (
-        <Sun size={32} color={"#111"} weight="bold" />
+        <Sun size={28} color={"#111"} weight="bold" />
       )}
     </button>
   );

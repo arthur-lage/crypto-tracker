@@ -1,35 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { CryptoCoin } from "../../components/CryptoCoin";
 
 import { Coin } from "../../interfaces/Coin";
 
 import { api } from "../../services/api";
 
-import { ThemeToggler } from "../../components/ThemeToggler";
+import styles from "./styles.module.scss";
 
-import styles from "../../styles/Home.module.scss";
+import { CryptoCoin } from "../../components/CryptoCoin";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { Loading } from "../../components/Loading";
+import { CoinList } from "../../components/CoinList";
 
 export function Home() {
   const [coinList, setCoinList] = useState<Coin[]>([]);
-  const [darkTheme, setDarkTheme] = useState(false);
-
-  const toggleTheme = () => {
-    setDarkTheme(!darkTheme);
-    if (!darkTheme == true) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await api.get("/coins");
-      const { data } = res;
+      try {
+        const res = await api.get("/coins");
+        const { data } = res;
 
-      setCoinList(data);
+        setCoinList(data);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
     }
 
     fetchData();
@@ -37,18 +35,11 @@ export function Home() {
 
   return (
     <div>
-      <header>
-        <Link to="/" className={styles.title}>
-          Crypto Tracker
-        </Link>
-        <ThemeToggler darkTheme={darkTheme} toggleTheme={toggleTheme} />
-      </header>
-      <div className={styles.coinList}>
-        {coinList.map((coin) => (
-          <CryptoCoin key={coin.id} coin={coin} />
-        ))}
-      </div>
-      <span>Using CoinGecko CryptoAPI</span>
+      <Header />
+
+      {loading ? <Loading /> : <CoinList coinList={coinList} />}
+
+      <Footer />
     </div>
   );
 }

@@ -29,3 +29,12 @@ body.dark {
   --card: #27223b;
   --text: #fff;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--text);
+}
